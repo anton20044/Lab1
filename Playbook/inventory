@@ -14,7 +14,7 @@
 [etcd_cluster]  # recommendation: 3, or 5-7 nodes
 10.74.174.3
 10.74.174.4
-10.74.174.2
+10.74.174.6
 
 # if dcs_exists: false and dcs_type: "consul"
 [consul_instances]  # recommendation: 3 or 5-7 nodes
