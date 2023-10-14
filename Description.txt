@@ -1,9 +1,21 @@
 1) namespace: sre-cource-student-24
-2) Playbook разворачивает:
+2) HostName: weather24
+3) Playbook разворачивает:
  - 3 узла etcd
  - 2 узла PostgreSQL
  - 1 узел HAProxy
  - Создает базу данных weather
  - Создает пользователя admin и выставляет его владельцем базы weather
  - В файле PG_HBA выставляются разрешения для приема подключений пользователя admin к базе weather
-3) Helm Chart разворачивает один POD из образа Docker. Высталвены пробы readiness/liveness. Добавлены переменные для смены порта службы и для подключения к базе данных.
+4) Запуск плайбука осуществляется с хоста с HAProxyю На все хосты размещен открытый ключ для авторизации без пароля SSH
+5) Запуск Playbook'а: ansible-playbook deploy_pgcluster.yml
+6) Helm Chart разворачивает PODы  из образа Docker (ghcr.io/ldest/sre-course/api:f0135e1). 
+7) Высталвены пробы readiness/liveness по адресам /healtHz/ready и /healtHz/ready соответственно. 
+8) Добавлены переменные для смены порта службы и ConnectionString для подключения к базе данных.
+9) Разворачивание Helm Char: helm install my my -n sre-cource-student-24 --username student24 (cubeconfig предварительно помещен в каталог .kube)
+10) После запуска пода, подключаемся в консоль пода: kubectl exec --stdin --tty pod/my-5cb6cf6c5-6h76r -- /bin/bash
+11) Получаем скрипт для создания таблиц на СУБД cat Migrations/init.sql
+12) Создаем таблицы на СУБД согласно выводу скрипта
+13) Проверка работоспособности (IP адрес 91.185.85.213 получен путен запроса к кластеру K8S - kubectl describe ingress):
+ - curl -v -H "Host: weather24"  http://91.185.85.213:8989/Cities - выводит данные из таблицы cities на СУБД
+ - curl -v -H "Host: weather24"  http://91.185.85.213/WeatherForecast - выводит данные из таблицы weatherforecast на СУБД

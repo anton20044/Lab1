@@ -2,16 +2,16 @@
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
-replicaCount: 1
+replicaCount: 2
 
 image:
   repository: ghcr.io/ldest/sre-course/api
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: c4f3862
+  tag: f0135e1
 
 imagePullSecrets: []
-nameOverride: my1
+nameOverride: ""
 fullnameOverride: ""
 
 serviceAccount:
@@ -27,7 +27,7 @@ serviceAccount:
   
 podAnnotations: {}
 podLabels: 
-  tag: myLab1
+  tag: ""
 
 podSecurityContext: {}
   # fsGroup: 2000
@@ -42,7 +42,7 @@ securityContext: {}
 
 service:
   type: ClusterIP
-  port: 8089
+  port: 8989
   dbpath: server=91.185.86.1; port=5000; database=weather; user id=admin; password=admin; 
 
 ingress:
@@ -52,7 +52,7 @@ ingress:
     # kubernetes.io/ingress.class: nginx
     # kubernetes.io/tls-acme: "true"
   hosts:
-    - host: weather24.sre-course.example
+    - host: weather24
       paths:
         - path: /
           pathType: ImplementationSpecific
@@ -71,7 +71,7 @@ resources:
       memory: 128Mi
 
     requests:
-      cpu: 0.1
+      cpu: "250m"
       memory: 64Mi
 
 autoscaling:

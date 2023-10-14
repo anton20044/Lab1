@@ -22,5 +22,4 @@
 *.tmproj
 .vscode/
 test-connection.yaml
-ingress.yaml
-#service.yaml
+

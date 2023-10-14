@@ -37,8 +37,8 @@ spec:
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}                    
           env:
-          - name: DOTNET_ENVIRONMENT            
-            value: Development 
+          #- name: DOTNET_ENVIRONMENT            
+          #  value: Development 
           - name: CONNECTIONSTRINGS__PGCONNECTION
             value: {{ .Values.service.dbpath }}
           - name: ASPNETCORE_URLS
@@ -50,7 +50,7 @@ spec:
           livenessProbe:            
             httpGet:
               path: /healtHz/ready
-              port: http     
+              port: http  
             initialDelaySeconds: 2
             periodSeconds: 5       
           readinessProbe:
