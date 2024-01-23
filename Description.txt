@@ -1,3 +1,4 @@
+0)
 1) namespace: sre-cource-student-24
 2) HostName: weather24
 3) Playbook разворачивает:
